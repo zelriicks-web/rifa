@@ -143,16 +143,18 @@
 
 <div class="numeros">
 
-    {% for numero in numeros %}
+{% for numero, estado in numeros %}
 
-        <button
-            class="numero"
-            onclick="seleccionar(this)"
-        >
-            {{ numero }}
-        </button>
+    <button
+        class="numero {% if estado == 'vendido' %}vendido{% endif %}"
+        {% if estado != 'vendido' %}
+        onclick="seleccionar(this)"
+        {% endif %}
+    >
+        {{ "%04d"|format(numero) }}
+    </button>
 
-    {% endfor %}
+{% endfor %}
 
 </div>
 
