@@ -141,20 +141,20 @@
             Valor del número: $1.000
         </div>
 
-        <div class="numeros">
+<div class="numeros">
 
-            <button class="numero" onclick="seleccionar(this)">0001</button>
-            <button class="numero" onclick="seleccionar(this)">0002</button>
-            <button class="numero" onclick="seleccionar(this)">0003</button>
-            <button class="numero" onclick="seleccionar(this)">0004</button>
-            <button class="numero" onclick="seleccionar(this)">0005</button>
-            <button class="numero" onclick="seleccionar(this)">0006</button>
-            <button class="numero" onclick="seleccionar(this)">0007</button>
-            <button class="numero" onclick="seleccionar(this)">0008</button>
-            <button class="numero" onclick="seleccionar(this)">0009</button>
-            <button class="numero vendido">0010</button>
+    {% for numero in numeros %}
 
-        </div>
+        <button
+            class="numero"
+            onclick="seleccionar(this)"
+        >
+            {{ numero }}
+        </button>
+
+    {% endfor %}
+
+</div>
 
         <div class="seleccion-info">
             Números seleccionados:
