@@ -3,13 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi página de rifas</title>
+
+    <title>Rifas Online</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        header p {
+            margin: 8px 0 0;
+            color: #cbd5e1;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .rifa {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .rifa h2 {
+            margin-top: 0;
+            font-size: 28px;
+        }
+
+        .premio {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .precio {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .numeros {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            gap: 10px;
+        }
+
+        .numero {
+            border: none;
+            padding: 14px 5px;
+            border-radius: 8px;
+            background: #22c55e;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .numero:hover {
+            transform: scale(1.05);
+        }
+
+        .numero.seleccionado {
+            background: #2563eb;
+        }
+
+        .numero.vendido {
+            background: #ef4444;
+            cursor: not-allowed;
+        }
+
+        .comprar {
+            margin-top: 30px;
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            background: #111827;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .comprar:hover {
+            background: #1f2937;
+        }
+
+        .seleccion-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+    </style>
 </head>
+
 <body>
 
-    <h1>🎟️ Mi página de rifas</h1>
+<header>
+    <h1>🎟️ Rifas Online</h1>
+    <p>Elige tu número y participa</p>
+</header>
 
-    <p>Próximamente podrás comprar tus números aquí.</p>
+<div class="container">
+
+    <div class="rifa">
+
+        <h2>🎁 Gran Rifa</h2>
+
+        <div class="premio">
+            Premio: <strong>Próximamente</strong>
+        </div>
+
+        <div class="precio">
+            Valor del número: $1.000
+        </div>
+
+        <div class="numeros">
+
+            <button class="numero" onclick="seleccionar(this)">0001</button>
+            <button class="numero" onclick="seleccionar(this)">0002</button>
+            <button class="numero" onclick="seleccionar(this)">0003</button>
+            <button class="numero" onclick="seleccionar(this)">0004</button>
+            <button class="numero" onclick="seleccionar(this)">0005</button>
+            <button class="numero" onclick="seleccionar(this)">0006</button>
+            <button class="numero" onclick="seleccionar(this)">0007</button>
+            <button class="numero" onclick="seleccionar(this)">0008</button>
+            <button class="numero" onclick="seleccionar(this)">0009</button>
+            <button class="numero vendido">0010</button>
+
+        </div>
+
+        <div class="seleccion-info">
+            Números seleccionados:
+            <strong id="seleccionados">Ninguno</strong>
+        </div>
+
+        <button class="comprar" onclick="comprar()">
+            Continuar
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+let seleccionados = [];
+
+function seleccionar(boton) {
+
+    const numero = boton.innerText;
+
+    if (boton.classList.contains("seleccionado")) {
+
+        boton.classList.remove("seleccionado");
+
+        seleccionados = seleccionados.filter(n => n !== numero);
+
+    } else {
+
+        boton.classList.add("seleccionado");
+
+        seleccionados.push(numero);
+    }
+
+    actualizarSeleccion();
+}
+
+function actualizarSeleccion() {
+
+    const elemento = document.getElementById("seleccionados");
+
+    if (seleccionados.length === 0) {
+
+        elemento.innerText = "Ninguno";
+
+    } else {
+
+        elemento.innerText = seleccionados.join(", ");
+    }
+}
+
+function comprar() {
+
+    if (seleccionados.length === 0) {
+
+        alert("Selecciona al menos un número.");
+
+        return;
+    }
+
+    alert(
+        "Has seleccionado: " +
+        seleccionados.join(", ") +
+        "\n\nPróximamente podremos completar la compra."
+    );
+}
+
+</script>
 
 </body>
 </html>
